@@ -1,3 +1,10 @@
+# Emiliano's notes:
+## Added line 33 in `ansible_stack.sh` to bind the roles directory to host.
+## Added some new env vars on `hosts.yml`.
+## Added a `clean.sh` file to run it in case of failure and don't clean all manually.
+
+---
+
 # Lab environment for Ansible challenge
 
 This laboratory is based on docker and tries to reproduce a small network environment where you can test your playbooks.
