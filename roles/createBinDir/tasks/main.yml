@@ -1,0 +1,16 @@
+- name: Create directory {{ new_dir }} on {{ working_path }}
+  become: true
+  ansible.builtin.file:
+    path: "{{ working_path }}/{{ new_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Is {{ working_path }} created?
+  ansible.builtin.stat:
+    path: "{{ working_path }}/{{ new_dir }}"
+  register: directory
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "The directory {{ working_path }}/{{ new_dir }} was succesfully created"
+  when: directory.stat.exists

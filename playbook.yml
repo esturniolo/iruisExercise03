@@ -1,0 +1,13 @@
+- name: Update and upgrade packages.
+  hosts: prod, staging
+  gather_facts: false
+  roles:
+    - updateUpgrade
+
+- name: Execute the rest of the steps only in Staging.
+  hosts: all:!prod:!localhost
+  gather_facts: false
+  roles:
+    - createBinDir
+    - copyFiles
+    - cron

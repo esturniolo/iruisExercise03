@@ -30,6 +30,7 @@ docker run \
   -v "$(pwd)"/server_files/ansible.cfg:/etc/ansible/ansible.cfg \
   -v "$(pwd)"/server_files/hosts.yml:/etc/ansible/hosts.yml \
   -v "$(pwd)"/agent_files/:/etc/ansible/agent_files/ \
+  -v "$(pwd)"/roles/:/etc/ansible/roles/ \
   -v "$(pwd)"/playbook.yml:/etc/ansible/playbook.yml \
   epicsoft/ansible:latest \
   sh -c "ansible-playbook /etc/ansible/playbook.yml"

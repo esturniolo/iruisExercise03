@@ -1,0 +1,13 @@
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: When system was updated?
+  ansible.builtin.command: "ls -l /var/log/apt/term.log"
+  register: updated
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "Please take a look to this filestamp to see when the system was updated ---> {{ updated.stdout_lines }}"

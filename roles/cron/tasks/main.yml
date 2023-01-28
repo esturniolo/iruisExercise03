@@ -1,0 +1,16 @@
+- name: Cron {{ working_path_cron}}/{{ file }} - Root user
+  become: true
+  ansible.builtin.cron:
+    name: "This will run daily at 3:15 PM"
+    minute: "15"
+    hour: "15"
+    user: root
+    job: "bash {{ working_path_cron }}/{{ file }}"
+
+- name: Get root crontab entries.
+  ansible.builtin.command: 'sudo su -c "crontab -l"'
+  register: crontab
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "The root crontab has the following entries ---> {{ crontab.stdout_lines }}"

@@ -1,0 +1,33 @@
+- name: Copy bashrc to {{ working_path }}
+  become: true
+  ansible.builtin.copy:
+    src: files/bashrc
+    dest: "{{ working_path }}/.bashrc"
+    mode: 0755
+
+- name: Copy x.sh to {{ working_path }}/bin
+  become: true
+  ansible.builtin.copy:
+    src: files/x.sh
+    dest: "{{ working_path }}/bin/x.sh"
+    mode: 0755
+
+- name: Is .bashrc in ~?
+  ansible.builtin.stat:
+    path: "{{ working_path }}/.bashrc"
+  register: fileAtHome
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "The file .bashrc is in {{ working_path }}"
+  when: fileAtHome.stat.exists
+
+- name: Is x.sh in ~/bin?
+  ansible.builtin.stat:
+    path: "{{ working_path }}/bin/x.sh"
+  register: fileAtBin
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "The file x.sh is in {{ working_path }}/bin"
+  when: fileAtBin.stat.exists
